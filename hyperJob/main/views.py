@@ -26,3 +26,14 @@ class UserLoginView(LoginView):
     redirect_field_name = '/'
 
 
+class AddPost(View):
+    template_name = 'addPost.html'
+
+    def get(self, request):
+        if request.user.is_authenticated:
+            if request.user.is_staff:
+                return render(request, self.template_name, {'is_staff': True})
+            else:
+                return render(request, self.template_name, {'is_staff': False})
+        else:
+            return render(request, 'blank.html')

@@ -19,15 +19,23 @@ from django.contrib.auth.views import LogoutView
 from django.views.generic import RedirectView
 
 from main.views import MainMenu, SignupView, UserLoginView
-from resume.views import ListResume
-from vacancy.views import ListVacancy
+from main.views import AddPost
+from resume.views import ListResume, AddResume
+from vacancy.views import ListVacancy, AddVacancy
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainMenu.as_view()),
 
     path('resumes/', ListResume.as_view()),
+    path('resume/new/', AddResume.as_view()),
+    path('resume/new', AddResume.as_view(), name='resume/new'),
+
     path('vacancies/', ListVacancy.as_view()),
+    path('vacancy/new/', AddVacancy.as_view()),
+    path('vacancy/new', AddVacancy.as_view(), name='vacancy/new'),
+
+    path('home/', AddPost.as_view()),
 
     path('signup/', SignupView.as_view()),
     path('signup', SignupView.as_view(), name='signup'),
